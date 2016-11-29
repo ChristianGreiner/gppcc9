@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Duality;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-using Duality;
 
 namespace FillItUp
 {
@@ -12,6 +11,9 @@ namespace FillItUp
 	/// </summary>
 	public class FillItUpCorePlugin : CorePlugin
 	{
-		// Override methods here for global logic
+		protected override void InitPlugin()
+		{
+			base.InitPlugin();
+		}
 	}
 }

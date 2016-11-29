@@ -21,6 +21,8 @@ namespace FillItUp
 
         private Cup activeCup = null;
 
+
+
         public void OnUpdate()
         {
             var keyboard = DualityApp.Keyboard;
@@ -28,11 +30,7 @@ namespace FillItUp
             if (hud != null)
                 hud.Score++;
 
-
-            if (keyboard.KeyPressed(Key.Space))
-            {
-                activeCup?.Fill();
-            }
-       }
+            activeCup?.Fill(keyboard.KeyPressed(Key.Space));
+        }
     }
 }

@@ -312,12 +312,12 @@
                         </parentTransform>
                         <pos dataType="Struct" type="Duality.Vector3">
                           <X dataType="Float">4.76837158E-07</X>
-                          <Y dataType="Float">-80</Y>
+                          <Y dataType="Float">65</Y>
                           <Z dataType="Float">0</Z>
                         </pos>
                         <posAbs dataType="Struct" type="Duality.Vector3">
                           <X dataType="Float">4.76837158E-07</X>
-                          <Y dataType="Float">-80</Y>
+                          <Y dataType="Float">65</Y>
                           <Z dataType="Float">0</Z>
                         </posAbs>
                         <scale dataType="Float">1</scale>
@@ -358,10 +358,10 @@
                 <offset dataType="Int">0</offset>
                 <pixelGrid dataType="Bool">false</pixelGrid>
                 <rect dataType="Struct" type="Duality.Rect">
-                  <H dataType="Float">20</H>
+                  <H dataType="Float">28</H>
                   <W dataType="Float">100</W>
                   <X dataType="Float">-50</X>
-                  <Y dataType="Float">-10</Y>
+                  <Y dataType="Float">-14</Y>
                 </rect>
                 <rectMode dataType="Enum" type="Duality.Components.Renderers.SpriteRenderer+UVMode" name="Stretch" value="0" />
                 <sharedMat dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Material]]">
@@ -373,11 +373,6 @@
               <fillSpeed dataType="Float">0.3</fillSpeed>
               <gameobj dataType="ObjectRef">3693600976</gameobj>
               <maxFillHeight dataType="Float">175</maxFillHeight>
-              <rnd dataType="Struct" type="System.Random" id="2180546282">
-                <inext dataType="Int">1</inext>
-                <inextp dataType="Int">22</inextp>
-                <SeedArray dataType="Array" type="System.Int32[]" id="1393553696">0, 1268464687, 1196237655, 2102850800, 302886023, 141934924, 1502917428, 578085112, 1499933073, 722446206, 1117618606, 1920656171, 1884150716, 675531150, 51322916, 1476779440, 559782132, 699227986, 230148575, 357991695, 326225352, 1592017088, 616487449, 521747805, 808467971, 1967157358, 380772895, 670305045, 559787838, 339842464, 718719576, 1838809584, 1147224751, 1037323197, 1255219773, 873156664, 335230012, 523983619, 1819091212, 2006374231, 296030739, 1481125308, 2049850965, 2051220237, 558931937, 1935939567, 1075335835, 1199753927, 1950561470, 1016294333, 1980956464, 656921193, 2029686604, 427980529, 1142315434, 1747149081</SeedArray>
-              </rnd>
               <waterSpriteRenderer dataType="ObjectRef">2439156493</waterSpriteRenderer>
             </activeCup>
             <gameobj dataType="ObjectRef">3114500229</gameobj>

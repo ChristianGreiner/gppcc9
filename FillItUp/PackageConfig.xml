@@ -7,6 +7,7 @@
     <Package id="AdamsLair.Duality.Backend.DotNetFramework" version="2.1.1.0" />
     <Package id="AdamsLair.Duality.Plugins.Compatibility" version="2.0.2.0" />
     <Package id="AdamsLair.Duality.Docs" version="2.0.1.0" />
+    <Package id="SnowyPeak.Duality.Plugins.YAUI.Core" version="1.0.0.0" />
     <Package id="AdamsLair.Duality.Backend.DefaultOpenTK" version="2.0.11.0" />
     <Package id="AdamsLair.Duality.Editor" version="2.7.9.0" />
     <Package id="AdamsLair.Duality.Editor.Plugins.Base" version="2.2.4.0" />

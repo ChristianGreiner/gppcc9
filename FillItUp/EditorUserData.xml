@@ -101,16 +101,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--DockPanel configuration file. Author: Weifen Luo, all rights reserved.-->
 <!--!!! AUTOMATICALLY GENERATED FILE. DO NOT MODIFY !!!-->
-<DockPanel FormatVersion="1.0" DockLeftPortion="0.149088541666667" DockRightPortion="0.173307291666667" DockTopPortion="0.25" DockBottomPortion="0.25" ActiveDocumentPane="6" ActivePane="6">
+<DockPanel FormatVersion="1.0" DockLeftPortion="0.169921875" DockRightPortion="0.222135416666667" DockTopPortion="0.25" DockBottomPortion="0.25" ActiveDocumentPane="6" ActivePane="6">
   <Contents Count="6">
     <Content ID="0" PersistString="Duality.Editor.Plugins.CamView.CamView" AutoHidePortion="0.25" IsHidden="False" IsFloat="False" />
-    <Content ID="1" PersistString="Duality.Editor.Plugins.ProjectView.ProjectFolderView" AutoHidePortion="0.149088541666667" IsHidden="False" IsFloat="False" />
-    <Content ID="2" PersistString="Duality.Editor.Plugins.SceneView.SceneView" AutoHidePortion="0.149088541666667" IsHidden="False" IsFloat="False" />
-    <Content ID="3" PersistString="Duality.Editor.Plugins.ObjectInspector.ObjectInspector" AutoHidePortion="0.173307291666667" IsHidden="False" IsFloat="False" />
+    <Content ID="1" PersistString="Duality.Editor.Plugins.ProjectView.ProjectFolderView" AutoHidePortion="0.169921875" IsHidden="False" IsFloat="False" />
+    <Content ID="2" PersistString="Duality.Editor.Plugins.SceneView.SceneView" AutoHidePortion="0.169921875" IsHidden="False" IsFloat="False" />
+    <Content ID="3" PersistString="Duality.Editor.Plugins.ObjectInspector.ObjectInspector" AutoHidePortion="0.222135416666667" IsHidden="False" IsFloat="False" />
     <Content ID="4" PersistString="Duality.Editor.Plugins.LogView.LogView" AutoHidePortion="0.25" IsHidden="False" IsFloat="False" />
     <Content ID="5" PersistString="Duality.Editor.Plugins.CamView.CamView" AutoHidePortion="0.25" IsHidden="False" IsFloat="False" />
   </Contents>
-  <Panes Count="7">
+  <Panes Count="8">
     <Pane ID="0" DockState="DockLeft" ActiveContent="2">
       <Contents Count="1">
         <Content ID="0" RefID="2" />
@@ -148,6 +148,11 @@
         <Content ID="1" RefID="5" />
       </Contents>
     </Pane>
+    <Pane ID="7" DockState="Float" ActiveContent="-1">
+      <Contents Count="1">
+        <Content ID="0" RefID="5" />
+      </Contents>
+    </Pane>
   </Panes>
   <DockWindows>
     <DockWindow ID="0" DockState="Document" ZOrderIndex="0">
@@ -175,7 +180,7 @@
       </NestedPanes>
     </DockWindow>
   </DockWindows>
-  <FloatWindows Count="2">
+  <FloatWindows Count="3">
     <FloatWindow ID="0" Bounds="550, 564, 300, 300" ZOrderIndex="0">
       <NestedPanes Count="1">
         <Pane ID="0" RefID="1" PrevPane="-1" Alignment="Right" Proportion="0.5" />
@@ -184,6 +189,11 @@
     <FloatWindow ID="1" Bounds="84, 141, 699, 429" ZOrderIndex="1">
       <NestedPanes Count="1">
         <Pane ID="0" RefID="5" PrevPane="-1" Alignment="Right" Proportion="0.5" />
+      </NestedPanes>
+    </FloatWindow>
+    <FloatWindow ID="2" Bounds="26, 0, 300, 842" ZOrderIndex="2">
+      <NestedPanes Count="1">
+        <Pane ID="0" RefID="7" PrevPane="-1" Alignment="Right" Proportion="0.5" />
       </NestedPanes>
     </FloatWindow>
   </FloatWindows>

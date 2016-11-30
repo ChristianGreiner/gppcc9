@@ -3,33 +3,20 @@ using Duality.Input;
 
 namespace FillItUp
 {
-	public class GameManager : Component, ICmpUpdatable
-	{
-		public HUD Hud
-		{
-			get { return hud; }
-			set { hud = value; }
-		}
+    public class GameManager : Component, ICmpUpdatable
+    {
+        public Cup ActiveCup
+        {
+            get { return activeCup; }
+            set { activeCup = value; }
+        }
 
-		public Cup ActiveCup
-		{
-			get { return activeCup; }
-			set { activeCup = value; }
-		}
+        private Cup activeCup = null;
 
-		private HUD hud = null;
-
-		private Cup activeCup = null;
-
-		public void OnUpdate()
-		{
-			var keyboard = DualityApp.Keyboard;
-			var buttonState = keyboard.KeyPressed(Key.Space);
-
-			if (hud != null)
-				hud.Score++;
-
-			activeCup?.Fill(buttonState);
-		}
-	}
+        public void OnUpdate()
+        {
+            var keystate = DualityApp.Keyboard.KeyPressed(Key.Space);
+            activeCup?.Fill(keystate);
+        }
+    }
 }

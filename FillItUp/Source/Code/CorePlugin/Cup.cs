@@ -1,51 +1,142 @@
-﻿using Duality;
-using Duality.Components.Renderers;
+﻿using System;
+using Duality;
+using Duality.Components;
+using Duality.Drawing;
+using Duality.Input;
+using Duality.Resources;
 
 namespace FillItUp
 {
-	public class Cup : Component, ICmpInitializable
-	{
-		public SpriteRenderer WaterRenderer
-		{
-			get { return waterRenderer; }
-			set { waterRenderer = value; }
-		}
+    public class Cup : Renderer, ICmpInitializable, ICmpUpdatable
+    {
+        public override float BoundRadius { get; } = float.MaxValue;
 
-		public float MaxFillHeight
-		{
-			get { return maxFillHeight; }
-			set { maxFillHeight = value; }
-		}
+        public float CupWidth
+        {
+            get { return cupWidth; }
+            set { cupWidth = value; }
+        }
 
-		public float FillSpeed
-		{
-			get { return fillSpeed; }
-			set { fillSpeed = value; }
-		}
+        public float CupBottomPosY
+        {
+            get { return cupBottomPosY; }
+            set { cupBottomPosY = value; }
+        }
 
-		private SpriteRenderer waterRenderer = null;
-		private float maxFillHeight = 250f;
-		private float fillSpeed = 1;
+        public float WaterFillHeight
+        {
+            get { return waterFillHeight; }
+        }
 
-		public void OnInit(InitContext context)
-		{
-		}
+        public float MaxFillHeight
+        {
+            get { return maxFillHeight; }
+            set { maxFillHeight = value; }
+        }
 
-		public void OnShutdown(ShutdownContext context)
-		{
-		}
+        public float FillSpeed
+        {
+            get { return fillSpeed; }
+            set { fillSpeed = value; }
+        }
 
-		public void Fill(bool keyState)
-		{
-			Log.Editor.Write("Button State: " + keyState);
+        private float cupWidth = 110f;
+        private float cupBottomPosY = 80f;
+        private float maxFillHeight = 160f;
+        private float fillSpeed = 2f;
 
-			if (waterRenderer == null) return;
-			var rec = waterRenderer.Rect;
-			if (rec.H < maxFillHeight)
-			{
-				var value = rec.H + 1 * fillSpeed * Time.LastDelta;
-				waterRenderer.Rect = new Rect(rec.X, rec.Y, rec.W, value);
-			}
-		}
-	}
+        [DontSerialize]
+        private float waterFillHeight = 0f;
+
+        [DontSerialize]
+        private readonly Random rnd = new Random();
+
+        [DontSerialize]
+        private Range limitRange = new Range();
+
+        [DontSerialize]
+        private float waterLimitPosY = 0f;
+
+        [DontSerialize]
+        private float waterLimitY = 0f;
+
+        [DontSerialize]
+        private bool isFilling = false;
+
+        public void OnInit(InitContext context)
+        {
+            if (context == InitContext.Activate)
+            {
+                SetRandomLimit();
+            }
+        }
+
+        public void OnShutdown(ShutdownContext context)
+        {
+        }
+
+        public void Fill(bool keyState)
+        {
+            if (keyState)
+            {
+                if (waterFillHeight <= maxFillHeight)
+                {
+                    Log.Editor.Write("Water Height: " + waterFillHeight);
+                    waterFillHeight += fillSpeed;
+                    isFilling = true;
+                }
+            }
+
+            if (!keyState && isFilling)
+            {
+                if (waterFillHeight >= waterLimitY - limitRange.MinValue && waterFillHeight <= waterLimitY + limitRange.MaxValue)
+                {
+                    Log.Editor.Write("WON!");
+                }
+
+            }
+        }
+
+        public void OnUpdate()
+        {
+            if (DualityApp.Keyboard.KeyHit(Key.A))
+            {
+                SetRandomLimit();
+            }
+
+            if (DualityApp.Keyboard.KeyHit(Key.R))
+            {
+                Scene.Reload();
+            }
+        }
+
+        public void SetRandomLimit()
+        {
+            var offset = 20f;
+            var rndRangeValue = rnd.Next(10, 30);
+            waterLimitPosY = rnd.NextFloat(cupBottomPosY - limitRange.MinValue - offset, -cupBottomPosY - limitRange.MaxValue + offset);
+            limitRange = new Range(rndRangeValue);
+
+            // fix this
+            waterLimitY = waterLimitPosY + cupBottomPosY;
+
+            Log.Editor.Write("Range: " + rndRangeValue.ToString() + " Range Pos: " + waterLimitPosY);
+
+        }
+
+        public override void Draw(IDrawDevice device)
+        {
+            var canvas = new Canvas(device);
+            var pos = GameObj.Transform.Pos;
+
+            // draw fill limit
+            canvas.State.ColorTint = new ColorRgba(255, 0, 0, 0.5f);
+            canvas.FillRect(pos.X - cupWidth / 2f, waterLimitPosY, 0.1f, cupWidth, limitRange.MaxValue);
+
+            // draw water
+            canvas.State.ColorTint = new ColorRgba(52, 152, 219);
+            canvas.FillRect(pos.X - cupWidth / 2f, cupBottomPosY - waterFillHeight, 0.2f, cupWidth, waterFillHeight);
+        }
+
+    }
 }

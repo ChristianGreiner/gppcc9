@@ -6,13 +6,7 @@ namespace FillItUp
 {
     public class MainMenuController : Component, ICmpUpdatable
     {
-        public ContentRef<Scene> GameScene
-        {
-            get { return gameScene; }
-            set { gameScene = value; }
-        }
-
-        private ContentRef<Scene> gameScene = null;
+        public ContentRef<Scene>  NextScene { get; set; }
 
         public void OnUpdate()
         {
@@ -20,7 +14,10 @@ namespace FillItUp
 
             if (keyboard.KeyHit(Key.Space))
             {
-
+                if (NextScene != null)
+                {
+                    Scene.SwitchTo(NextScene);
+                }
             }
         }
     }

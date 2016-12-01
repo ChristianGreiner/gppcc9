@@ -23,12 +23,12 @@
             <pos dataType="Struct" type="Duality.Vector3">
               <X dataType="Float">0</X>
               <Y dataType="Float">0</Y>
-              <Z dataType="Float">-500</Z>
+              <Z dataType="Float">-450</Z>
             </pos>
             <posAbs dataType="Struct" type="Duality.Vector3">
               <X dataType="Float">0</X>
               <Y dataType="Float">0</Y>
-              <Z dataType="Float">-500</Z>
+              <Z dataType="Float">-450</Z>
             </posAbs>
             <scale dataType="Float">1</scale>
             <scaleAbs dataType="Float">1</scaleAbs>
@@ -160,6 +160,7 @@
             <active dataType="Bool">true</active>
             <cupBottomPosY dataType="Float">80</cupBottomPosY>
             <cupWidth dataType="Float">110</cupWidth>
+            <fillSpeed dataType="Float">3</fillSpeed>
             <gameobj dataType="ObjectRef">3854830877</gameobj>
             <maxFillHeight dataType="Float">160</maxFillHeight>
             <visibilityGroup dataType="Enum" type="Duality.Drawing.VisibilityFlag" name="Group0" value="1" />
@@ -333,12 +334,12 @@
             <parentTransform />
             <pos dataType="Struct" type="Duality.Vector3">
               <X dataType="Float">0</X>
-              <Y dataType="Float">-78</Y>
+              <Y dataType="Float">81</Y>
               <Z dataType="Float">0</Z>
             </pos>
             <posAbs dataType="Struct" type="Duality.Vector3">
               <X dataType="Float">0</X>
-              <Y dataType="Float">-78</Y>
+              <Y dataType="Float">81</Y>
               <Z dataType="Float">0</Z>
             </posAbs>
             <scale dataType="Float">1</scale>

@@ -57,6 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColorFader.cs" />
     <Compile Include="CorePlugin.cs" />
     <Compile Include="Cup.cs" />
     <Compile Include="GameManager.cs" />
@@ -64,6 +65,8 @@
     <Compile Include="MainMenuController.cs" />
     <Compile Include="OverlayRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SceneSwitcher.cs" />
+    <Compile Include="TinyTween.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <PropertyGroup>

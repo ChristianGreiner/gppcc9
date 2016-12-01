@@ -1,4 +1,5 @@
 ﻿using Duality;
+using Duality.Drawing;
 using Duality.Input;
 using Duality.Resources;
 
@@ -14,11 +15,9 @@ namespace FillItUp
 
             if (keyboard.KeyHit(Key.Space))
             {
-                if (NextScene != null)
-                {
-                    Scene.SwitchTo(NextScene);
-                }
-            }
+                var sceneSwitcher = GameObj.AddComponent<SceneSwitcher>();
+                sceneSwitcher.Switch(NextScene, 500f);
+            }   
         }
     }
 }

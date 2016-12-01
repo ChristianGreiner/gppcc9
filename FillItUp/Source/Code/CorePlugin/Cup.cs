@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Threading;
 using Duality;
 using Duality.Components;
+using Duality.Components.Renderers;
 using Duality.Drawing;
 using Duality.Input;
 using Duality.Resources;
@@ -45,6 +47,14 @@ namespace FillItUp
         private float maxFillHeight = 160f;
         private float fillSpeed = 2f;
 
+        private readonly Vector3Tween posTween = new Vector3Tween();
+        private readonly ColorTween colorTween = new ColorTween();
+
+        private bool showLimit = true;
+
+        [DontSerialize]
+        private SpriteRenderer spriteRenderer = null;
+
         [DontSerialize]
         private float waterFillHeight = 0f;
 
@@ -67,6 +77,7 @@ namespace FillItUp
         {
             if (context == InitContext.Activate)
             {
+                spriteRenderer = GameObj.GetComponent<SpriteRenderer>();
                 SetRandomLimit();
             }
         }
@@ -85,13 +96,16 @@ namespace FillItUp
                     waterFillHeight += fillSpeed;
                     isFilling = true;
                 }
+                else
+                {
+
+                }
             }
 
             if (!keyState && isFilling)
             {
                 if (waterFillHeight >= waterLimitY - limitRange.MinValue && waterFillHeight <= waterLimitY + limitRange.MaxValue)
                 {
-                    Log.Editor.Write("WON!");
                 }
 
             }
@@ -108,14 +122,37 @@ namespace FillItUp
             {
                 Scene.Reload();
             }
+
+            if (DualityApp.Keyboard.KeyHit(Key.B))
+            {
+                var startColor = spriteRenderer.ColorTint;
+                var pos = GameObj.Transform.Pos;
+                var targetPos = pos - new Vector3(200, 0, 0);
+                posTween.Start(pos, targetPos, 2000f, Easing.CubicEaseInOut);
+                colorTween.Start(startColor, ColorRgba.TransparentWhite, 2000f, Easing.CubicEaseInOut);
+
+                showLimit = false;
+
+            }
+
+            colorTween.Update(Time.LastDelta);
+            posTween.Update(Time.LastDelta);
+
+            if (colorTween.State == TweenState.Running && posTween.State == TweenState.Running)
+            {
+                GameObj.Transform.Pos = posTween.CurrentValue;
+                spriteRenderer.ColorTint = colorTween.CurrentValue;
+            }
         }
 
         public void SetRandomLimit()
         {
+            showLimit = true;
             var offset = 20f;
             var rndRangeValue = rnd.Next(10, 30);
             waterLimitPosY = rnd.NextFloat(cupBottomPosY - limitRange.MinValue - offset, -cupBottomPosY - limitRange.MaxValue + offset);
             limitRange = new Range(rndRangeValue);
+            fillSpeed = rnd.Next(1, 4);
 
             // fix this
             waterLimitY = waterLimitPosY + cupBottomPosY;
@@ -129,9 +166,13 @@ namespace FillItUp
             var canvas = new Canvas(device);
             var pos = GameObj.Transform.Pos;
 
-            // draw fill limit
-            canvas.State.ColorTint = new ColorRgba(255, 0, 0, 0.5f);
-            canvas.FillRect(pos.X - cupWidth / 2f, waterLimitPosY, 0.1f, cupWidth, limitRange.MaxValue);
+            if (showLimit)
+            {
+                // draw fill limit
+                canvas.State.ColorTint = new ColorRgba(255, 0, 0, 0.5f);
+                canvas.FillRect(pos.X - cupWidth / 2f, waterLimitPosY, 0.1f, cupWidth, limitRange.MaxValue);
+
+            }
 
             // draw water
             canvas.State.ColorTint = new ColorRgba(52, 152, 219);

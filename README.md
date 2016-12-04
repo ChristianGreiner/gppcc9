@@ -17,7 +17,7 @@ Fill It Up is my submission for the [Let's Gamedev Game++ Community Challenge 9]
 The topic of this challange: on button control
 
 The goal of this game is to fill up cups as much as you can until the countdown is over.
-If you got a combo of 5 you will get +5 seconds.
+When 5 combos is reached, it increases the time remaining.
 
 ## Control
 Space -> fill up the cup

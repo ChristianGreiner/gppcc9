@@ -22,12 +22,12 @@
             <parentTransform />
             <pos dataType="Struct" type="Duality.Vector3">
               <X dataType="Float">0</X>
-              <Y dataType="Float">0</Y>
+              <Y dataType="Float">-80</Y>
               <Z dataType="Float">-500</Z>
             </pos>
             <posAbs dataType="Struct" type="Duality.Vector3">
               <X dataType="Float">0</X>
-              <Y dataType="Float">0</Y>
+              <Y dataType="Float">-80</Y>
               <Z dataType="Float">-500</Z>
             </posAbs>
             <scale dataType="Float">1</scale>
@@ -166,22 +166,6 @@
           <item dataType="Struct" type="FillItUp.Cup" id="3573454762">
             <_x003C_BoundRadius_x003E_k__BackingField dataType="Float">0</_x003C_BoundRadius_x003E_k__BackingField>
             <active dataType="Bool">true</active>
-            <colorTween dataType="Struct" type="FillItUp.ColorTween" id="1562478702">
-              <currentTime dataType="Float">0</currentTime>
-              <duration dataType="Float">0</duration>
-              <end dataType="Struct" type="Duality.Drawing.ColorRgba" />
-              <lerpFunc dataType="Delegate" type="FillItUp.LerpFunc`1[[Duality.Drawing.ColorRgba]]" id="769062480" multi="true">
-                <method dataType="MemberInfo" id="1613942204" value="M:Duality.Drawing.ColorRgba:Lerp(Duality.Drawing.ColorRgba,Duality.Drawing.ColorRgba,System.Single)" />
-                <target />
-                <invocationList dataType="Array" type="System.Delegate[]" id="2752948886">
-                  <item dataType="ObjectRef">769062480</item>
-                </invocationList>
-              </lerpFunc>
-              <scaleFunc />
-              <start dataType="Struct" type="Duality.Drawing.ColorRgba" />
-              <state dataType="Enum" type="FillItUp.TweenState" name="Stopped" value="2" />
-              <value dataType="Struct" type="Duality.Drawing.ColorRgba" />
-            </colorTween>
             <cupBottomPosY dataType="Float">0</cupBottomPosY>
             <cupWidth dataType="Float">110</cupWidth>
             <fillingSound dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Sound]]">
@@ -190,22 +174,7 @@
             <fillSpeed dataType="Float">3</fillSpeed>
             <gameobj dataType="ObjectRef">3854830877</gameobj>
             <maxFillHeight dataType="Int">160</maxFillHeight>
-            <posTween dataType="Struct" type="FillItUp.Vector3Tween" id="2230259658">
-              <currentTime dataType="Float">0</currentTime>
-              <duration dataType="Float">0</duration>
-              <end dataType="Struct" type="Duality.Vector3" />
-              <lerpFunc dataType="Delegate" type="FillItUp.LerpFunc`1[[Duality.Vector3]]" id="712998380" multi="true">
-                <method dataType="MemberInfo" id="2216464996" value="M:Duality.Vector3:Lerp(Duality.Vector3,Duality.Vector3,System.Single)" />
-                <target />
-                <invocationList dataType="Array" type="System.Delegate[]" id="1324038166">
-                  <item dataType="ObjectRef">712998380</item>
-                </invocationList>
-              </lerpFunc>
-              <scaleFunc />
-              <start dataType="Struct" type="Duality.Vector3" />
-              <state dataType="Enum" type="FillItUp.TweenState" name="Stopped" value="2" />
-              <value dataType="Struct" type="Duality.Vector3" />
-            </posTween>
+            <showDebug dataType="Bool">false</showDebug>
             <showLimit dataType="Bool">true</showLimit>
             <success dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Sound]]">
               <contentPath dataType="String">Data/Audio/success.Sound.res</contentPath>
@@ -430,8 +399,50 @@
           <item dataType="Struct" type="FillItUp.Hud" id="3243919250">
             <_x003C_BoundRadius_x003E_k__BackingField dataType="Float">0</_x003C_BoundRadius_x003E_k__BackingField>
             <active dataType="Bool">true</active>
+            <comboCounterText dataType="Struct" type="Duality.Drawing.FormattedText" id="2737617858">
+              <flowAreas />
+              <fonts dataType="Array" type="Duality.ContentRef`1[[Duality.Resources.Font]][]" id="4008236560">
+                <item dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Font]]">
+                  <contentPath dataType="String">Default:Font:GenericMonospace10</contentPath>
+                </item>
+              </fonts>
+              <icons />
+              <lineAlign dataType="Enum" type="Duality.Alignment" name="Left" value="1" />
+              <maxHeight dataType="Int">0</maxHeight>
+              <maxWidth dataType="Int">0</maxWidth>
+              <sourceText />
+              <wrapMode dataType="Enum" type="Duality.Drawing.FormattedText+WrapMode" name="Word" value="1" />
+            </comboCounterText>
+            <countdownText dataType="Struct" type="Duality.Drawing.FormattedText" id="1177466378">
+              <flowAreas />
+              <fonts dataType="Array" type="Duality.ContentRef`1[[Duality.Resources.Font]][]" id="3405129112">
+                <item dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Font]]">
+                  <contentPath dataType="String">Default:Font:GenericMonospace10</contentPath>
+                </item>
+              </fonts>
+              <icons />
+              <lineAlign dataType="Enum" type="Duality.Alignment" name="Left" value="1" />
+              <maxHeight dataType="Int">0</maxHeight>
+              <maxWidth dataType="Int">0</maxWidth>
+              <sourceText />
+              <wrapMode dataType="Enum" type="Duality.Drawing.FormattedText+WrapMode" name="Word" value="1" />
+            </countdownText>
             <gameManager dataType="ObjectRef">624668326</gameManager>
             <gameobj dataType="ObjectRef">2193707266</gameobj>
+            <gameStartTimerText dataType="Struct" type="Duality.Drawing.FormattedText" id="2719895218">
+              <flowAreas />
+              <fonts dataType="Array" type="Duality.ContentRef`1[[Duality.Resources.Font]][]" id="2278099104">
+                <item dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Font]]">
+                  <contentPath dataType="String">Default:Font:GenericMonospace10</contentPath>
+                </item>
+              </fonts>
+              <icons />
+              <lineAlign dataType="Enum" type="Duality.Alignment" name="Left" value="1" />
+              <maxHeight dataType="Int">0</maxHeight>
+              <maxWidth dataType="Int">0</maxWidth>
+              <sourceText dataType="String">4</sourceText>
+              <wrapMode dataType="Enum" type="Duality.Drawing.FormattedText+WrapMode" name="Word" value="1" />
+            </gameStartTimerText>
             <textFont dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Font]]">
               <contentPath dataType="String">Data\Fonts\OpenSans.Font.res</contentPath>
             </textFont>

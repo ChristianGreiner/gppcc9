@@ -47,7 +47,7 @@ namespace FillItUp
 		private int maxFillHeight = 160;
 		private float fillSpeed = 2f;
 		private readonly ContentRef<Sound> fillingSound = new ContentRef<Sound>(null, "Data/Audio/cup-fill.Sound.res");
-		private readonly ContentRef<Sound> success = new ContentRef<Sound>(null, "Data/Audio/success.Sound.res");
+		private readonly ContentRef<Sound> successSound = new ContentRef<Sound>(null, "Data/Audio/success.Sound.res");
 
 		private bool showLimit = true;
 		private bool showDebug = false;
@@ -125,7 +125,7 @@ namespace FillItUp
 				if (waterFillHeight >= -waterLimitPosY - limitRange / 2 && waterFillHeight <= -waterLimitPosY + limitRange / 2)
 				{
 					Log.Editor.Write("WON");
-					DualityApp.Sound.PlaySound(success);
+					DualityApp.Sound.PlaySound(successSound);
 					gameManager?.InformScore(true);
 				}
 				else

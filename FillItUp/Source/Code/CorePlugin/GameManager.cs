@@ -44,7 +44,7 @@ namespace FillItUp
 		}
 
 		private Cup activeCup = null;
-		private ContentRef<Prefab> cupPrefab = null;
+		private readonly ContentRef<Sound> comboSound = new ContentRef<Sound>(null, "Data/Audio/combo.Sound.res");
 
 		[DontSerialize]
 		private bool gameOver = false;
@@ -59,7 +59,7 @@ namespace FillItUp
 		private float startGameTimer = 4000f;
 
 		[DontSerialize]
-		private float countdown = 2000f;
+		private float countdown = 21000f;
 
 		[DontSerialize]
 		private float gameoverTimer = 2000f;
@@ -97,6 +97,7 @@ namespace FillItUp
 				// add time to countdown
 				if (comboCounter == 5)
 				{
+					DualityApp.Sound.PlaySound(comboSound);
 					countdown += 5000f;
 
 					// reset the combo counter

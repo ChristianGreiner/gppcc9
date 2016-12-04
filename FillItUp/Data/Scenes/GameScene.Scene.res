@@ -23,12 +23,12 @@
             <pos dataType="Struct" type="Duality.Vector3">
               <X dataType="Float">0</X>
               <Y dataType="Float">0</Y>
-              <Z dataType="Float">-450</Z>
+              <Z dataType="Float">-500</Z>
             </pos>
             <posAbs dataType="Struct" type="Duality.Vector3">
               <X dataType="Float">0</X>
               <Y dataType="Float">0</Y>
-              <Z dataType="Float">-450</Z>
+              <Z dataType="Float">-500</Z>
             </posAbs>
             <scale dataType="Float">1</scale>
             <scaleAbs dataType="Float">1</scaleAbs>
@@ -123,8 +123,16 @@
             <gameobj dataType="ObjectRef">3854830877</gameobj>
             <ignoreParent dataType="Bool">false</ignoreParent>
             <parentTransform />
-            <pos dataType="Struct" type="Duality.Vector3" />
-            <posAbs dataType="Struct" type="Duality.Vector3" />
+            <pos dataType="Struct" type="Duality.Vector3">
+              <X dataType="Float">0</X>
+              <Y dataType="Float">-80</Y>
+              <Z dataType="Float">0</Z>
+            </pos>
+            <posAbs dataType="Struct" type="Duality.Vector3">
+              <X dataType="Float">0</X>
+              <Y dataType="Float">-80</Y>
+              <Z dataType="Float">0</Z>
+            </posAbs>
             <scale dataType="Float">1</scale>
             <scaleAbs dataType="Float">1</scaleAbs>
             <vel dataType="Struct" type="Duality.Vector3" />
@@ -158,11 +166,50 @@
           <item dataType="Struct" type="FillItUp.Cup" id="3573454762">
             <_x003C_BoundRadius_x003E_k__BackingField dataType="Float">0</_x003C_BoundRadius_x003E_k__BackingField>
             <active dataType="Bool">true</active>
-            <cupBottomPosY dataType="Float">80</cupBottomPosY>
+            <colorTween dataType="Struct" type="FillItUp.ColorTween" id="1562478702">
+              <currentTime dataType="Float">0</currentTime>
+              <duration dataType="Float">0</duration>
+              <end dataType="Struct" type="Duality.Drawing.ColorRgba" />
+              <lerpFunc dataType="Delegate" type="FillItUp.LerpFunc`1[[Duality.Drawing.ColorRgba]]" id="769062480" multi="true">
+                <method dataType="MemberInfo" id="1613942204" value="M:Duality.Drawing.ColorRgba:Lerp(Duality.Drawing.ColorRgba,Duality.Drawing.ColorRgba,System.Single)" />
+                <target />
+                <invocationList dataType="Array" type="System.Delegate[]" id="2752948886">
+                  <item dataType="ObjectRef">769062480</item>
+                </invocationList>
+              </lerpFunc>
+              <scaleFunc />
+              <start dataType="Struct" type="Duality.Drawing.ColorRgba" />
+              <state dataType="Enum" type="FillItUp.TweenState" name="Stopped" value="2" />
+              <value dataType="Struct" type="Duality.Drawing.ColorRgba" />
+            </colorTween>
+            <cupBottomPosY dataType="Float">0</cupBottomPosY>
             <cupWidth dataType="Float">110</cupWidth>
+            <fillingSound dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Sound]]">
+              <contentPath dataType="String">Data/Audio/cup-fill.Sound.res</contentPath>
+            </fillingSound>
             <fillSpeed dataType="Float">3</fillSpeed>
             <gameobj dataType="ObjectRef">3854830877</gameobj>
-            <maxFillHeight dataType="Float">160</maxFillHeight>
+            <maxFillHeight dataType="Int">160</maxFillHeight>
+            <posTween dataType="Struct" type="FillItUp.Vector3Tween" id="2230259658">
+              <currentTime dataType="Float">0</currentTime>
+              <duration dataType="Float">0</duration>
+              <end dataType="Struct" type="Duality.Vector3" />
+              <lerpFunc dataType="Delegate" type="FillItUp.LerpFunc`1[[Duality.Vector3]]" id="712998380" multi="true">
+                <method dataType="MemberInfo" id="2216464996" value="M:Duality.Vector3:Lerp(Duality.Vector3,Duality.Vector3,System.Single)" />
+                <target />
+                <invocationList dataType="Array" type="System.Delegate[]" id="1324038166">
+                  <item dataType="ObjectRef">712998380</item>
+                </invocationList>
+              </lerpFunc>
+              <scaleFunc />
+              <start dataType="Struct" type="Duality.Vector3" />
+              <state dataType="Enum" type="FillItUp.TweenState" name="Stopped" value="2" />
+              <value dataType="Struct" type="Duality.Vector3" />
+            </posTween>
+            <showLimit dataType="Bool">true</showLimit>
+            <success dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Sound]]">
+              <contentPath dataType="String">Data/Audio/success.Sound.res</contentPath>
+            </success>
             <visibilityGroup dataType="Enum" type="Duality.Drawing.VisibilityFlag" name="Group0" value="1" />
           </item>
         </_items>
@@ -288,6 +335,7 @@
           <item dataType="Struct" type="FillItUp.GameManager" id="624668326">
             <active dataType="Bool">true</active>
             <activeCup dataType="ObjectRef">3573454762</activeCup>
+            <cupPrefab dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Prefab]]" />
             <gameobj dataType="ObjectRef">3360831770</gameobj>
           </item>
         </_items>
@@ -382,6 +430,7 @@
           <item dataType="Struct" type="FillItUp.Hud" id="3243919250">
             <_x003C_BoundRadius_x003E_k__BackingField dataType="Float">0</_x003C_BoundRadius_x003E_k__BackingField>
             <active dataType="Bool">true</active>
+            <gameManager dataType="ObjectRef">624668326</gameManager>
             <gameobj dataType="ObjectRef">2193707266</gameobj>
             <textFont dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Font]]">
               <contentPath dataType="String">Data\Fonts\OpenSans.Font.res</contentPath>

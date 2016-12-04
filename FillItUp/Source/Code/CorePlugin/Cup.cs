@@ -73,6 +73,9 @@ namespace FillItUp
         [DontSerialize]
         private bool isFilling = false;
 
+        [DontSerialize]
+        private GameManager gameManager = null;
+
         public void OnInit(InitContext context)
         {
             if (context == InitContext.Activate)
@@ -86,6 +89,11 @@ namespace FillItUp
         {
         }
 
+        public void Initialize(GameManager gameManager)
+        {
+            this.gameManager = gameManager;
+        }
+
         public void Fill(bool keyState)
         {
             if (keyState)
@@ -95,10 +103,6 @@ namespace FillItUp
                     Log.Editor.Write("Water Height: " + waterFillHeight);
                     waterFillHeight += fillSpeed;
                     isFilling = true;
-                }
-                else
-                {
-
                 }
             }
 
@@ -130,6 +134,8 @@ namespace FillItUp
                 var targetPos = pos - new Vector3(200, 0, 0);
                 posTween.Start(pos, targetPos, 2000f, Easing.CubicEaseInOut);
                 colorTween.Start(startColor, ColorRgba.TransparentWhite, 2000f, Easing.CubicEaseInOut);
+
+                gameManager.ActiveCup = null;
 
                 showLimit = false;
 

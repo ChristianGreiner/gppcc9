@@ -1,4 +1,5 @@
 ﻿using Duality;
+using Duality.Audio;
 using Duality.Input;
 using Duality.Resources;
 using System.Diagnostics;
@@ -45,6 +46,12 @@ namespace FillItUp
 
 		private Cup activeCup = null;
 		private readonly ContentRef<Sound> comboSound = new ContentRef<Sound>(null, "Data/Audio/combo.Sound.res");
+		private readonly ContentRef<Sound> tickingSound = new ContentRef<Sound>(null, "Data/Audio/ticking-clock.Sound.res");
+
+		private SoundInstance tickingSoundInstance = null;
+
+		[DontSerialize]
+		private bool tickingSoundPlaying = false;
 
 		[DontSerialize]
 		private bool gameOver = false;
@@ -56,10 +63,10 @@ namespace FillItUp
 		private int score = 0;
 
 		[DontSerialize]
-		private float startGameTimer = 4000f;
+		private float startGameTimer = 4000f; // 4000f;
 
 		[DontSerialize]
-		private float countdown = 21000f;
+		private float countdown = 21000f; // 21
 
 		[DontSerialize]
 		private float gameoverTimer = 2000f;
@@ -95,13 +102,10 @@ namespace FillItUp
 				}
 
 				// add time to countdown
-				if (comboCounter == 5)
+				if ((comboCounter % 5) == 0)
 				{
 					DualityApp.Sound.PlaySound(comboSound);
 					countdown += 5000f;
-
-					// reset the combo counter
-					comboCounter = 0;
 				}
 			}
 			else
@@ -109,6 +113,9 @@ namespace FillItUp
 				previousScoreSuccess = false;
 				comboCounter = 0;
 			}
+
+			var value = comboCounter % 5;
+			Log.Editor.Write("VALUe: " + value);
 		}
 
 		public void OnUpdate()
@@ -119,14 +126,22 @@ namespace FillItUp
 			{
 				activeCup?.Fill(keystate);
 				countdown = MathF.Max(0.0f, countdown - Time.MsPFMult * Time.TimeMult);
+
+				if (countdown <= 6000.0f && !tickingSoundPlaying)
+				{
+					tickingSoundInstance = DualityApp.Sound.PlaySound(tickingSound);
+					tickingSoundPlaying = true;
+					tickingSoundInstance.Looped = true;
+				}
 			}
 
 			if (countdown <= 0.0f)
 			{
 				gameoverTimer = MathF.Max(0.0f, gameoverTimer - Time.MsPFMult * Time.TimeMult);
 				gameOver = true;
+				tickingSoundInstance?.Stop();
 
-				// don't reload the scene instantly when the game is finished an the play spamms the space key
+				// don't reload the scene instantly when the game is finished and the play spamms the space key
 				if (keystate && gameoverTimer <= 0.0f)
 					Scene.Reload();
 			}

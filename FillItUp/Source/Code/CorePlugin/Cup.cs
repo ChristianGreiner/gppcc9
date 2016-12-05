@@ -48,24 +48,24 @@ namespace FillItUp
 		private float fillSpeed = 2f;
 		private readonly ContentRef<Sound> fillingSound = new ContentRef<Sound>(null, "Data/Audio/cup-fill.Sound.res");
 		private readonly ContentRef<Sound> successSound = new ContentRef<Sound>(null, "Data/Audio/success.Sound.res");
+		private readonly Random rnd = new Random();
+
+		private readonly ColorRgba waterColor = new ColorRgba(52, 152, 219);
+		private readonly ColorRgba coffeeColor = new ColorRgba(111, 78, 55);
+		private readonly ColorRgba sodaColor = new ColorRgba(241, 196, 15);
+		private readonly ColorRgba greenTeeColor = new ColorRgba(46, 204, 113);
 
 		private bool showLimit = true;
 		private bool showDebug = false;
 
 		[DontSerialize]
-		private SpriteRenderer spriteRenderer = null;
+		private ColorRgba currentLiquidColor = ColorRgba.White;
 
 		[DontSerialize]
 		private float waterFillHeight = 0f;
 
 		[DontSerialize]
-		private readonly Random rnd = new Random();
-
-		[DontSerialize]
 		private float waterLimitPosY = 0f;
-
-		[DontSerialize]
-		private int waterLimitY = 0;
 
 		[DontSerialize]
 		private int limitRange = 0;
@@ -86,7 +86,6 @@ namespace FillItUp
 		{
 			if (context == InitContext.Activate)
 			{
-				spriteRenderer = GameObj.GetComponent<SpriteRenderer>();
 				gameManager = GameObj.ParentScene.FindComponent<GameManager>();
 			}
 		}
@@ -98,6 +97,7 @@ namespace FillItUp
 		public void Init()
 		{
 			SetRandomLimit();
+			currentLiquidColor = waterColor;
 		}
 
 		public void Fill(bool keyState)
@@ -106,8 +106,7 @@ namespace FillItUp
 			{
 				if (waterFillHeight <= maxFillHeight)
 				{
-					Log.Editor.Write("Water Height: " + waterFillHeight + " Range Pos: " + waterLimitPosY);
-					waterFillHeight += fillSpeed;
+					waterFillHeight += fillSpeed * Time.TimeScale;
 					isFilling = true;
 				}
 			}
@@ -140,14 +139,13 @@ namespace FillItUp
 
 		public void OnUpdate()
 		{
-			if (DualityApp.Keyboard.KeyHit(Key.A))
+			if (DualityApp.Keyboard.KeyPressed(Key.A))
 			{
-				SetRandomLimit();
+				Time.TimeScale = 0.5f;
 			}
-
-			if (DualityApp.Keyboard.KeyHit(Key.R))
+			else
 			{
-				Scene.Reload();
+				Time.TimeScale = 1f;
 			}
 		}
 
@@ -157,6 +155,27 @@ namespace FillItUp
 			waterFillHeight = 0;
 			isFilling = false;
 			fillingSoundPlaying = false;
+
+			// set random color
+			var colorId = rnd.Next(0, 4);
+			switch (colorId)
+			{
+				case 0:
+					currentLiquidColor = waterColor;
+					break;
+
+				case 1:
+					currentLiquidColor = coffeeColor;
+					break;
+
+				case 2:
+					currentLiquidColor = sodaColor;
+					break;
+
+				case 3:
+					currentLiquidColor = greenTeeColor;
+					break;
+			}
 		}
 
 		public void SetRandomLimit()
@@ -165,8 +184,6 @@ namespace FillItUp
 			var offset = 20;
 			limitRange = rnd.Next(10, 30);
 			waterLimitPosY = rnd.Next(-maxFillHeight + offset, -offset - limitRange / 2);
-			// fix this
-			Log.Editor.Write("Range: " + limitRange + " Range Pos: " + waterLimitPosY);
 		}
 
 		public override void Draw(IDrawDevice device)
@@ -193,7 +210,7 @@ namespace FillItUp
 			}
 
 			// draw water
-			canvas.State.ColorTint = new ColorRgba(52, 152, 219);
+			canvas.State.ColorTint = currentLiquidColor;
 			canvas.FillRect(pos.X - cupWidth / 2f, cupBottomPosY - waterFillHeight, 0.2f, cupWidth, waterFillHeight);
 		}
 	}

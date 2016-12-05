@@ -41,12 +41,9 @@ namespace FillItUp
 
 			if (!gameManager.GameStarted)
 			{
-				var backgroundHeight = 200f;
+				const float backgroundHeight = 200f;
 				var countdownValue = (int)(gameManager.StartGameTimer / 1000f);
-				if (countdownValue > 0)
-					gameStartTimerText.ApplySource(countdownValue.ToString());
-				else
-					gameStartTimerText.ApplySource("GO");
+				gameStartTimerText.ApplySource(countdownValue > 0 ? countdownValue.ToString() : "GO");
 
 				// countdown text
 				canvas.State.ColorTint = ColorRgba.White;
@@ -55,58 +52,51 @@ namespace FillItUp
 
 				// background
 				canvas.State.TransformScale = new Vector2(1);
-				canvas.State.ColorTint = new ColorRgba(0, 0, 0, 0.8f);
+				canvas.State.ColorTint = new ColorRgba(0, 0, 0, 0.9f);
 				canvas.FillRect(0, resolution.Y / 2 - backgroundHeight / 2, 0.05f, resolution.X, backgroundHeight);
 			}
 			else if (gameManager.GameStarted)
 			{
 				// score
 				canvas.State.TransformScale = new Vector2(0.5f);
-				canvas.DrawText("Cups filled: " + gameManager.Score, 20, 30, 0f, Alignment.Left);
+				canvas.DrawText(gameManager.Score.ToString(), resolution.X / 2f, resolution.Y / 2f + 120, 0f, Alignment.Center);
 
 				// countdown
 				var countdownValue = (int)(gameManager.Countdown / 1000f);
 				canvas.State.TransformScale = new Vector2(1f);
-				canvas.State.ColorTint = countdownValue > 5 ? ColorRgba.Black : ColorRgba.Red;
+				canvas.State.ColorTint = countdownValue > 5 ? ColorRgba.Black : new ColorRgba(231, 76, 60);
 				countdownText.ApplySource(countdownValue.ToString());
-				canvas.DrawText("Time left: " + countdownText.SourceText, resolution.X / 2f, 100, 0f, Alignment.Center);
+				canvas.DrawText("Time left: " + countdownText.SourceText, resolution.X / 2f, resolution.Y / 2f - 200, 0f, Alignment.Center);
 
 				// combo counter
 				var comboValue = gameManager.ComboCounter;
-				canvas.State.TransformScale = new Vector2(1f);
-				if (comboValue >= 3)
-				{
-					canvas.State.ColorTint = ColorRgba.Green;
-				}
-				else
-				{
-					canvas.State.ColorTint = ColorRgba.Black;
-				}
+				canvas.State.TransformScale = new Vector2(0.75f);
+				canvas.State.ColorTint = comboValue >= 3 ? new ColorRgba(39, 174, 96) : ColorRgba.Black;
 				comboCounterText.ApplySource(comboValue.ToString());
-				canvas.DrawText("Combos: " + comboCounterText.SourceText, resolution.X / 2f, 160, 0f, Alignment.Center);
+				canvas.DrawText("Combos: " + comboCounterText.SourceText, resolution.X / 2f, resolution.Y / 2f - 140, 0.1f, Alignment.Center);
 			}
 
 			if (gameManager.GameOver)
 			{
-				var backgroundHeight = 300f;
+				const float backgroundHeight = 300f;
 				gameStartTimerText.ApplySource("GAME OVER");
 
 				// game over text
 				canvas.State.ColorTint = ColorRgba.White;
 				canvas.State.TransformScale = new Vector2(1.5f);
-				canvas.DrawText(gameStartTimerText.SourceText, resolution.X / 2f, resolution.Y / 2f, 0f, Alignment.Center);
+				canvas.DrawText(gameStartTimerText.SourceText, resolution.X / 2f, resolution.Y / 2f - 60, 0f, Alignment.Center);
 
 				// cups filled text
 				canvas.State.TransformScale = new Vector2(0.5f);
-				canvas.DrawText("YOU FILLED >" + gameManager.Score + "< CUPS", resolution.X / 2f, resolution.Y / 2f + 70f, 0f, Alignment.Center);
+				canvas.DrawText("YOU FILLED " + gameManager.Score + " CUPS", resolution.X / 2f, resolution.Y / 2f + 20f, 0f, Alignment.Center);
 
 				// restart game text
 				canvas.State.TransformScale = new Vector2(0.45f);
-				canvas.DrawText("PRESS SPACE TO RESTART", resolution.X / 2f, resolution.Y / 2f + 120f, 0f, Alignment.Center);
+				canvas.DrawText("PRESS SPACE TO RESTART", resolution.X / 2f, resolution.Y / 2f + 80f, 0f, Alignment.Center);
 
 				// background
 				canvas.State.TransformScale = new Vector2(1);
-				canvas.State.ColorTint = new ColorRgba(0, 0, 0, 0.8f);
+				canvas.State.ColorTint = new ColorRgba(0, 0, 0, 0.9f);
 				canvas.FillRect(0, resolution.Y / 2 - backgroundHeight / 2, 0.05f, resolution.X, backgroundHeight);
 			}
 		}

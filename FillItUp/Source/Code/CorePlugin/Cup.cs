@@ -139,14 +139,6 @@ namespace FillItUp
 
 		public void OnUpdate()
 		{
-			if (DualityApp.Keyboard.KeyPressed(Key.A))
-			{
-				Time.TimeScale = 0.5f;
-			}
-			else
-			{
-				Time.TimeScale = 1f;
-			}
 		}
 
 		public void RestartGame()

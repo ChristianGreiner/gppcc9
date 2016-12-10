@@ -1,7 +1,9 @@
 ﻿using Duality;
 using Duality.Audio;
+using Duality.Components;
 using Duality.Input;
 using Duality.Resources;
+using System;
 using System.Diagnostics;
 
 namespace FillItUp
@@ -44,14 +46,27 @@ namespace FillItUp
 			get { return gameOver; }
 		}
 
+		public int HighestCombo
+		{
+			get { return highestCombo; }
+		}
+
 		private Cup activeCup = null;
+		private GameObject camera = null;
 		private readonly ContentRef<Sound> comboSound = new ContentRef<Sound>(null, "Data/Audio/combo.Sound.res");
 		private readonly ContentRef<Sound> tickingSound = new ContentRef<Sound>(null, "Data/Audio/ticking-clock.Sound.res");
-
+		private readonly ContentRef<Sound> timeSlowdown = new ContentRef<Sound>(null, "Data/Audio/time-slowdown.Sound.res");
+		private readonly ContentRef<Sound> timeSpeedup = new ContentRef<Sound>(null, "Data/Audio/time-speedup.Sound.res");
 		private SoundInstance tickingSoundInstance = null;
 
 		[DontSerialize]
+		private int highestCombo;
+
+		[DontSerialize]
 		private bool tickingSoundPlaying = false;
+
+		[DontSerialize]
+		private bool slowdownActive = false;
 
 		[DontSerialize]
 		private bool gameOver = false;
@@ -69,6 +84,9 @@ namespace FillItUp
 		private float countdown = 21000f; // 21
 
 		[DontSerialize]
+		private float slowdownTimer = 3000f;
+
+		[DontSerialize]
 		private float gameoverTimer = 2000f;
 
 		[DontSerialize]
@@ -77,10 +95,17 @@ namespace FillItUp
 		[DontSerialize]
 		private bool previousScoreSuccess = false;
 
+		[DontSerialize]
+		private Vector3 orginalCameraPos = Vector3.Zero;
+
+		private readonly Random rnd = new Random();
+
 		public void OnInit(InitContext context)
 		{
 			if (context == InitContext.Activate)
 			{
+				camera = GameObj.ParentScene.FindComponent<Camera>().GameObj;
+				orginalCameraPos = camera.Transform.Pos;
 			}
 		}
 
@@ -95,10 +120,13 @@ namespace FillItUp
 				previousScoreSuccess = true;
 
 				score++;
+
 				if (previousScoreSuccess)
 				{
 					comboCounter++;
-					Log.Editor.Write("COMBO!");
+
+					if (highestCombo < comboCounter)
+						highestCombo = comboCounter;
 				}
 
 				// add time to countdown
@@ -106,16 +134,43 @@ namespace FillItUp
 				{
 					DualityApp.Sound.PlaySound(comboSound);
 					countdown += 5000f;
+
+					// slow down the time
+					var slowDownChance = rnd.Next(0, 10);
+					if (slowDownChance == 5)
+						TimeSlowDown();
 				}
 			}
 			else
 			{
 				previousScoreSuccess = false;
 				comboCounter = 0;
-			}
 
-			var value = comboCounter % 5;
-			Log.Editor.Write("VALUe: " + value);
+				// speed up the time when the previous score wasnt a combo
+				TimeSpeedUp();
+			}
+		}
+
+		private void TimeSlowDown()
+		{
+			if (!slowdownActive)
+			{
+				slowdownActive = true;
+				DualityApp.Sound.PlaySound(timeSlowdown);
+				Time.TimeScale = .5f;
+			}
+		}
+
+		private void TimeSpeedUp()
+		{
+			if (slowdownActive)
+			{
+				camera.Transform.Pos = orginalCameraPos;
+				slowdownActive = false;
+				Time.TimeScale = 1f;
+				slowdownTimer = 3000f;
+				DualityApp.Sound.PlaySound(timeSpeedup);
+			}
 		}
 
 		public void OnUpdate()
@@ -132,6 +187,18 @@ namespace FillItUp
 					tickingSoundInstance = DualityApp.Sound.PlaySound(tickingSound);
 					tickingSoundPlaying = true;
 					tickingSoundInstance.Looped = true;
+				}
+			}
+
+			if (slowdownActive && slowdownTimer >= 0.0f)
+			{
+				camera.Transform.Pos += new Vector3(0, 0, 0.5f);
+
+				slowdownTimer = slowdownTimer - Time.MsPFMult * Time.TimeMult;
+
+				if (slowdownTimer <= 0.0f)
+				{
+					TimeSpeedUp();
 				}
 			}
 

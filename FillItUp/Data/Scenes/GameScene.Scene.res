@@ -30,8 +30,8 @@
               <Y dataType="Float">-80</Y>
               <Z dataType="Float">-500</Z>
             </posAbs>
-            <scale dataType="Float">1</scale>
-            <scaleAbs dataType="Float">1</scaleAbs>
+            <scale dataType="Float">1E-07</scale>
+            <scaleAbs dataType="Float">1E-07</scaleAbs>
             <vel dataType="Struct" type="Duality.Vector3" />
             <velAbs dataType="Struct" type="Duality.Vector3" />
           </item>
@@ -166,6 +166,12 @@
           <item dataType="Struct" type="FillItUp.Cup" id="3573454762">
             <_x003C_BoundRadius_x003E_k__BackingField dataType="Float">0</_x003C_BoundRadius_x003E_k__BackingField>
             <active dataType="Bool">true</active>
+            <coffeeColor dataType="Struct" type="Duality.Drawing.ColorRgba">
+              <A dataType="Byte">255</A>
+              <B dataType="Byte">55</B>
+              <G dataType="Byte">78</G>
+              <R dataType="Byte">111</R>
+            </coffeeColor>
             <cupBottomPosY dataType="Float">0</cupBottomPosY>
             <cupWidth dataType="Float">110</cupWidth>
             <fillingSound dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Sound]]">
@@ -173,13 +179,36 @@
             </fillingSound>
             <fillSpeed dataType="Float">3</fillSpeed>
             <gameobj dataType="ObjectRef">3854830877</gameobj>
+            <greenTeeColor dataType="Struct" type="Duality.Drawing.ColorRgba">
+              <A dataType="Byte">255</A>
+              <B dataType="Byte">113</B>
+              <G dataType="Byte">204</G>
+              <R dataType="Byte">46</R>
+            </greenTeeColor>
             <maxFillHeight dataType="Int">160</maxFillHeight>
+            <rnd dataType="Struct" type="System.Random" id="1562478702">
+              <inext dataType="Int">0</inext>
+              <inextp dataType="Int">21</inextp>
+              <SeedArray dataType="Array" type="System.Int32[]" id="769062480">0, 2130553573, 1397157678, 901639380, 264899464, 2088150892, 1929148847, 79200316, 1445137306, 1950041258, 724657242, 1456406996, 2079049659, 1196195953, 1376592897, 478773369, 1265168836, 1225580840, 948151912, 72589051, 870721859, 1344392460, 1024416022, 1767985327, 1452001835, 380472525, 2035133580, 124572116, 1049283820, 452334600, 354258323, 1011835263, 451034973, 2079020105, 741233343, 723646409, 570290377, 98187887, 919800136, 1513238108, 228600104, 1137472212, 2049337186, 1388260468, 282401153, 1104793560, 1600522496, 1333211529, 2083115145, 1308298814, 481789801, 939222152, 56095660, 83285003, 1327671510, 1774090881</SeedArray>
+            </rnd>
             <showDebug dataType="Bool">false</showDebug>
             <showLimit dataType="Bool">true</showLimit>
-            <success dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Sound]]">
+            <sodaColor dataType="Struct" type="Duality.Drawing.ColorRgba">
+              <A dataType="Byte">255</A>
+              <B dataType="Byte">15</B>
+              <G dataType="Byte">196</G>
+              <R dataType="Byte">241</R>
+            </sodaColor>
+            <successSound dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Sound]]">
               <contentPath dataType="String">Data/Audio/success.Sound.res</contentPath>
-            </success>
+            </successSound>
             <visibilityGroup dataType="Enum" type="Duality.Drawing.VisibilityFlag" name="Group0" value="1" />
+            <waterColor dataType="Struct" type="Duality.Drawing.ColorRgba">
+              <A dataType="Byte">255</A>
+              <B dataType="Byte">219</B>
+              <G dataType="Byte">152</G>
+              <R dataType="Byte">52</R>
+            </waterColor>
           </item>
         </_items>
         <_size dataType="Int">3</_size>
@@ -304,8 +333,26 @@
           <item dataType="Struct" type="FillItUp.GameManager" id="624668326">
             <active dataType="Bool">true</active>
             <activeCup dataType="ObjectRef">3573454762</activeCup>
-            <cupPrefab dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Prefab]]" />
+            <camera dataType="ObjectRef">3146122859</camera>
+            <comboSound dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Sound]]">
+              <contentPath dataType="String">Data/Audio/combo.Sound.res</contentPath>
+            </comboSound>
             <gameobj dataType="ObjectRef">3360831770</gameobj>
+            <rnd dataType="Struct" type="System.Random" id="1214541854">
+              <inext dataType="Int">0</inext>
+              <inextp dataType="Int">21</inextp>
+              <SeedArray dataType="Array" type="System.Int32[]" id="2256942736">0, 1396124166, 194244046, 689857661, 2103764798, 183910857, 1060869109, 1593161711, 1077672487, 1830020549, 538772290, 65055585, 1170389530, 56854287, 1287823332, 1063987165, 566623905, 1263872112, 938295888, 641583629, 1480494036, 173119916, 1651489449, 1503328935, 722979736, 334281411, 438828593, 2055601917, 823578800, 1292325961, 1893243678, 728593391, 434014237, 516850410, 1639739708, 1659228044, 305225134, 790349946, 776007328, 863024004, 659673570, 1829126931, 613830054, 1228312614, 492258160, 34943516, 829413875, 1141045644, 1181677508, 875153873, 1880622556, 1405840754, 1353000255, 805415084, 1498290065, 1375988922</SeedArray>
+            </rnd>
+            <tickingSound dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Sound]]">
+              <contentPath dataType="String">Data/Audio/ticking-clock.Sound.res</contentPath>
+            </tickingSound>
+            <tickingSoundInstance />
+            <timeSlowdown dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Sound]]">
+              <contentPath dataType="String">Data/Audio/time-slowdown.Sound.res</contentPath>
+            </timeSlowdown>
+            <timeSpeedup dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Sound]]">
+              <contentPath dataType="String">Data/Audio/time-speedup.Sound.res</contentPath>
+            </timeSpeedup>
           </item>
         </_items>
         <_size dataType="Int">1</_size>
@@ -440,7 +487,7 @@
               <lineAlign dataType="Enum" type="Duality.Alignment" name="Left" value="1" />
               <maxHeight dataType="Int">0</maxHeight>
               <maxWidth dataType="Int">0</maxWidth>
-              <sourceText dataType="String">4</sourceText>
+              <sourceText dataType="String">3</sourceText>
               <wrapMode dataType="Enum" type="Duality.Drawing.FormattedText+WrapMode" name="Word" value="1" />
             </gameStartTimerText>
             <textFont dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Font]]">

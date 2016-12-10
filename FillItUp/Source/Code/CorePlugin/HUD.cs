@@ -88,7 +88,7 @@ namespace FillItUp
 
 				// cups filled text
 				canvas.State.TransformScale = new Vector2(0.5f);
-				canvas.DrawText("YOU FILLED " + gameManager.Score + " CUPS", resolution.X / 2f, resolution.Y / 2f + 20f, 0f, Alignment.Center);
+				canvas.DrawText("YOU FILLED " + gameManager.Score + " CUPS - YOUR HIGHEST COMBO: " + gameManager.HighestCombo, resolution.X / 2f, resolution.Y / 2f + 20f, 0f, Alignment.Center);
 
 				// restart game text
 				canvas.State.TransformScale = new Vector2(0.45f);

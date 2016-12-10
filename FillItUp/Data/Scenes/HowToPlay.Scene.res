@@ -281,7 +281,7 @@
               <lineAlign dataType="Enum" type="Duality.Alignment" name="Center" value="0" />
               <maxHeight dataType="Int">0</maxHeight>
               <maxWidth dataType="Int">0</maxWidth>
-              <sourceText dataType="String">/al         Hold the [Space Button]/nuntil the liquid reaches the fill height</sourceText>
+              <sourceText dataType="String">/al         Hold the Space Button/nuntil the liquid reaches the fill height</sourceText>
               <wrapMode dataType="Enum" type="Duality.Drawing.FormattedText+WrapMode" name="Glyph" value="0" />
             </text>
             <visibilityGroup dataType="Enum" type="Duality.Drawing.VisibilityFlag" name="Group0" value="1" />

@@ -4,7 +4,7 @@ using Duality.Resources;
 
 namespace FillItUp
 {
-	public class Hud : OverlayRenderer, ICmpInitializable
+	public class Hud : OverlayRenderer, ICmpInitializable, ICmpUpdatable
 	{
 		public ContentRef<Font> TextFont
 		{
@@ -27,6 +27,10 @@ namespace FillItUp
 		}
 
 		public void OnShutdown(ShutdownContext context)
+		{
+		}
+
+		public void OnUpdate()
 		{
 		}
 

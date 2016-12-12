@@ -52,7 +52,6 @@ namespace FillItUp
 		}
 
 		private Cup activeCup = null;
-		private GameObject camera = null;
 		private readonly ContentRef<Sound> comboSound = new ContentRef<Sound>(null, "Data/Audio/combo.Sound.res");
 		private readonly ContentRef<Sound> tickingSound = new ContentRef<Sound>(null, "Data/Audio/ticking-clock.Sound.res");
 		private readonly ContentRef<Sound> timeSlowdown = new ContentRef<Sound>(null, "Data/Audio/time-slowdown.Sound.res");
@@ -95,17 +94,16 @@ namespace FillItUp
 		[DontSerialize]
 		private bool previousScoreSuccess = false;
 
-		[DontSerialize]
-		private Vector3 orginalCameraPos = Vector3.Zero;
-
 		private readonly Random rnd = new Random();
+		private readonly Vector3Tween cupIntroTween = new Vector3Tween();
 
 		public void OnInit(InitContext context)
 		{
 			if (context == InitContext.Activate)
 			{
-				camera = GameObj.ParentScene.FindComponent<Camera>().GameObj;
-				orginalCameraPos = camera.Transform.Pos;
+				var resX = -DualityApp.TargetResolution.X;
+				var cupPos = activeCup.GameObj.Transform.Pos;
+				cupIntroTween.Start(new Vector3(resX, cupPos.Y, cupPos.Z), new Vector3(0, cupPos.Y, cupPos.Z), 4000f, Easing.CubicEaseOut);
 			}
 		}
 
@@ -133,7 +131,7 @@ namespace FillItUp
 				if ((comboCounter % 5) == 0)
 				{
 					DualityApp.Sound.PlaySound(comboSound);
-					countdown += 5000f;
+					countdown += 3000f;
 
 					// slow down the time
 					var slowDownChance = rnd.Next(0, 10);
@@ -165,7 +163,6 @@ namespace FillItUp
 		{
 			if (slowdownActive)
 			{
-				camera.Transform.Pos = orginalCameraPos;
 				slowdownActive = false;
 				Time.TimeScale = 1f;
 				slowdownTimer = 3000f;
@@ -192,8 +189,6 @@ namespace FillItUp
 
 			if (slowdownActive && slowdownTimer >= 0.0f)
 			{
-				camera.Transform.Pos += new Vector3(0, 0, 0.5f);
-
 				slowdownTimer = slowdownTimer - Time.MsPFMult * Time.TimeMult;
 
 				if (slowdownTimer <= 0.0f)
@@ -227,6 +222,15 @@ namespace FillItUp
 					activeCup?.Init();
 				}
 			}
+
+			// for intro animation
+			if (cupIntroTween.State == TweenState.Running)
+			{
+				if (activeCup != null)
+					activeCup.GameObj.Transform.Pos = cupIntroTween.CurrentValue;
+			}
+
+			cupIntroTween?.Update(Time.LastDelta);
 		}
 	}
 }
